@@ -9,14 +9,14 @@ with app.app_context():
     # some seed data
     vendor1 = Vendor(name='Insomnia Cookies')
     vendor2 = Vendor(name='Cookies Cream')
-    vendor3 = Vendor(name='Sweet Tooth')
-    vendor4 = Vendor(name='Candy Land')
-    vendor5 = Vendor(name='Sugar Rush')
+    vendor3 = Vendor(name='Sweet Indulgence')
+    vendor4 = Vendor(name='Sugar Plums')
+    vendor5 = Vendor(name='Crafted Confections')
 
-    sweet1 = Sweet(name='Chocolate Chip Cookies')
-    sweet2 = Sweet(name='Brownies')
+    sweet1 = Sweet(name='Chocolate Chip Cookie')
+    sweet2 = Sweet(name='Brownie')
     sweet3 = Sweet(name='Cupcakes')
-    sweet4 = Sweet(name='Donuts')
+    sweet4 = Sweet(name='Popsicles')
     sweet5 = Sweet(name='Ice Cream')
 
     vendor_sweet1 = VendorSweet(price=200, vendor=vendor1, sweet=sweet1)
