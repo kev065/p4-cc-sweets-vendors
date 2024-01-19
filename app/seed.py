@@ -2,6 +2,10 @@ from models import db, Vendor, Sweet, VendorSweet
 from app import app
 
 def seed_data():
+    # this will delete the existing data
+    db.drop_all()
+
+    # and then create the tables and seed the data
     db.create_all()
 
     # some seed data
@@ -24,4 +28,5 @@ def seed_data():
 if __name__ == '__main__':
     with app.app_context():
         seed_data()
+
 
