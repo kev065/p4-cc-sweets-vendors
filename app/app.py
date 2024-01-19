@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, make_response, jsonify, request
+from flask import Flask, make_response, jsonify, request, abort
 from flask_migrate import Migrate
 from models import db, Vendor, Sweet, VendorSweet, VendorSchema, SweetSchema, VendorSweetSchema
 
@@ -60,7 +60,12 @@ def create_vendor_sweet():
     vendor_sweet = VendorSweet(price=request.json['price'], vendor_id=request.json['vendor_id'], sweet_id=request.json['sweet_id'])
     db.session.add(vendor_sweet)
     db.session.commit()
-    return jsonify(vendor_sweet_schema.dump(vendor_sweet)), 201
+    
+    data = vendor_sweet_schema.dump(vendor_sweet)
+    data['name'] = vendor_sweet.sweet.name
+    
+    return jsonify(data), 201
+
 
 @app.route('/vendor_sweets/<int:vendor_sweet_id>', methods=['DELETE'])
 def delete_vendor_sweet(vendor_sweet_id):
