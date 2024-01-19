@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, fields
 from sqlalchemy.orm import validates
 from datetime import datetime
 from pytz import timezone
@@ -52,6 +52,8 @@ class SweetSchema(SQLAlchemyAutoSchema):
         load_instance = True
 
 class VendorSweetSchema(SQLAlchemyAutoSchema):
+    vendor = fields.Nested('VendorSchema', only=('id', 'name'))
+    sweet = fields.Nested('SweetSchema', only=('id', 'name'))
     class Meta:
         model = VendorSweet
         include_relationships = True
