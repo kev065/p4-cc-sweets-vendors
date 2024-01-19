@@ -1,7 +1,7 @@
 from models import db, Vendor, Sweet, VendorSweet
 from app import app
 
-with app.app_context():
+def seed_data():
     db.create_all()
 
     # some seed data
@@ -20,3 +20,8 @@ with app.app_context():
     db.session.commit()
 
     print("Seed data has been successfully added!")
+
+if __name__ == '__main__':
+    with app.app_context():
+        seed_data()
+
