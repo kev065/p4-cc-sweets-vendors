@@ -18,3 +18,5 @@ with app.app_context():
     db.session.add_all(vendor_sweets)
 
     db.session.commit()
+
+    print("Seed data has been successfully added!")
