@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -21,6 +22,15 @@ class VendorSweet(db.Model):
     price = db.Column(db.Float, nullable=False)
     vendor_id = db.Column(db.Integer, db.ForeignKey('vendor.id'), nullable=False)
     sweet_id = db.Column(db.Integer, db.ForeignKey('sweet.id'), nullable=False)
+
+    @validates('price')
+    def validate_price(self, key, price):
+        if price is None:
+            raise AssertionError('No price provided')
+        if price < 0:
+            raise AssertionError('Price cannot be a negative number')
+        return price
+
 
 class VendorSchema(SQLAlchemyAutoSchema):
     class Meta:
