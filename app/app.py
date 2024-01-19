@@ -35,6 +35,8 @@ def get_vendor(vendor_id):
     vendor = Vendor.query.get(vendor_id)
     if vendor is None:
         return jsonify({'error': 'Vendor not found'}), 404
+    if vendor.vendor_sweets is None:
+        vendor.vendor_sweets = []
     return jsonify(vendor_schema.dump(vendor))
 
 @app.route('/sweets', methods=['GET'])
@@ -47,6 +49,8 @@ def get_sweet(sweet_id):
     sweet = Sweet.query.get(sweet_id)
     if sweet is None:
         return jsonify({'error': 'Sweet not found'}), 404
+    if sweet.vendor_sweets is None:
+        sweet.vendor_sweets = []
     return jsonify(sweet_schema.dump(sweet))
 
 @app.route('/vendor_sweets', methods=['POST'])
